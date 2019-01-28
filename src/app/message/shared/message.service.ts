@@ -9,7 +9,7 @@ export class MessageService {
   constructor(private db: AngularFirestore) { }
 
   getMessages(): Observable<any> {
-    return this.db.collection('messages', ref => ref.orderBy('time')).valueChanges();
+    return this.db.collection('messages', ref => ref.orderBy('messages')).valueChanges();
   }
 
   getMessagesLastByLimit(limit: number): Observable<any> {

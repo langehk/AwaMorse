@@ -11,6 +11,12 @@
     <div class="column">
       <h2>{{messages?.length}} latest messages shown</h2>
       <h4 *ngFor="let message of messages">{{message.time}} - {{convertMessage(message.message)}}</h4>
+
+    </div>
+    <div class="column">
+      <h2>{{messages?.length}} Messages sorted</h2>
+     <h4 *ngFor="let message of messages">{{message.time}} - {{convertMessage(message.message)}}</h4>
+
     </div>
     <div class="column">
       <img alt="Angular Logo" src="http://www.codebug.org.uk/assets/steps/540/image_1.png">
