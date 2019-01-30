@@ -12,7 +12,6 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import { NewMessageComponent } from './new-message/new-message.component';
 import { AppRoutingModule } from './app-routing.module';
-import { NavbarComponent } from './message/shared/navbar/navbar.component';
 import { Component, HostBinding } from '@angular/core';
 import {animate, transition, trigger} from '@angular/animations';
 import { AnimationdemoComponent } from './animationdemo/animationdemo.component';
@@ -21,7 +20,6 @@ import { AnimationdemoComponent } from './animationdemo/animationdemo.component'
   declarations: [
     AppComponent,
     NewMessageComponent,
-    NavbarComponent,
     AnimationdemoComponent
   ],
   imports: [

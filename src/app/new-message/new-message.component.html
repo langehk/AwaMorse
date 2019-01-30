@@ -2,7 +2,8 @@
 <div class="background">
 <div class="body">
 
-<button ngClass="button8" type="button" class="btn-warning"> Single button</button>
+  <li><a routerLink="/new-message" >Home</a></li>
+
 
 <div *ngIf="!messages">Loading...</div>
 <div *ngIf="messages">
@@ -11,6 +12,7 @@
       🆘Welcome to my new {{ title }}🆘!
     </h1>
   </div>
+
   <div class="row">
     <div class="column">
       <h2>{{messages?.length}} latest messages shown</h2>
@@ -18,7 +20,7 @@
     </div>
 
     <div class="column">
-      <h2>{{messages?.length}} Messages sorted</h2>
+      <h2>{{messages?.length}} Messages sorted by name</h2>
      <h4 *ngFor="let message of messages">{{message.time}} - {{convertMessage(message.message)}}</h4>
     </div>
 
@@ -26,6 +28,8 @@
       <h2>{{messages?.length}} Messages sorted</h2>
       <h4 *ngFor="let message of messages">{{message.time}} - {{convertMessage(message.message)}}</h4>
     </div>
+
+
     <ul>
       <div *ngIf="latest">
         <h3>Latest Message Information:</h3>
@@ -52,9 +56,9 @@
       </div>
       <button [disabled]="!message" class="button3" (click)="send()"><h1>Send Message</h1></button>
 
-
-
     </div>
+
+
 
     <div class="column-image">
       <img alt="Angular Logo" src="https://pxt.azureedge.net/blob/dd730962888a691830c85c8b52d940afdfadb9b2/static/courses/csintro/radio/morse.png" height="450" width="350">

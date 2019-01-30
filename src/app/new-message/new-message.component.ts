@@ -16,7 +16,7 @@ export class NewMessageComponent {
   humanReadableMessage = '';
   time: number;
   constructor(private messageService: MessageService) {
-    this.messageService.getMessagesLastByLimit(5).subscribe(messages => {
+    this.messageService.getMessagesLastByLimit(2).subscribe(messages => {
       this.messages = messages;
       this.latest = messages[0];
     });
