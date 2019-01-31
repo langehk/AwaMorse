@@ -15,12 +15,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { Component, HostBinding } from '@angular/core';
 import {animate, transition, trigger} from '@angular/animations';
 import { AnimationdemoComponent } from './animationdemo/animationdemo.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewMessageComponent,
-    AnimationdemoComponent
+    AnimationdemoComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
