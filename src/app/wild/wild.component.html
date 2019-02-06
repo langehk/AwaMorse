@@ -1,8 +1,33 @@
 <div>
+  <li><a routerLink="" >Home</a></li>
+  <li><a routerLink="/show-log-message">Logs</a></li>
+
   <h1>List of products:</h1>
 <ul>
+  <div *ngIf="!products">Loading...</div>
   <li class="body" *ngFor="let product of products | async">
-    {{product.name}}
+    {{product.name}} <button class="button3" (click)="deleteProducts()">Delete</button>
   </li>
 </ul>
+
+  <div>
+    <h2>Test af knapper:</h2>
+
+
+    <div>
+      <button class="button1" (click)="getProducts();"><h2>Refresh list</h2></button>
+
+      <button class="button1" (click)="getProducts();"><h2>Customers</h2></button>
+
+      <button class="button1" (click)="getProducts();"><h2>Orders</h2></button>
+
+
+
+
+
+
+
+    </div>
+
+  </div>
 </div>

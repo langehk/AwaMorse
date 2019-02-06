@@ -12,7 +12,16 @@ export class WildComponent implements OnInit {
   constructor(private ps: ProductService) { }
 
   ngOnInit() {
+    this.getProducts();
+  }
+
+
+  getProducts() {
     this.products = this.ps.getProducts();
+  }
+
+  deleteProducts() {
+    this.products = this.ps.deleteProducts();
   }
 
 }

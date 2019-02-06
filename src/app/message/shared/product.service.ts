@@ -16,6 +16,12 @@ export class ProductService {
      * return this.db.collection('products', ref => ref.orderBy('messages')).valueChanges();
       */
   }
+
+  deleteProducts(): Observable<any> {
+    return this.db.collection('products').valueChanges();
+  }
+
+
 }
 
 
