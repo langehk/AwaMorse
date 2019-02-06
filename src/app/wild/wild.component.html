@@ -1,3 +1,5 @@
-<p>
-  wild works!
-</p>
+<ul>
+  <li class="body" *ngFor="let product of products | async">
+    {{product.name}}
+  </li>
+</ul>
