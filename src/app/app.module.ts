@@ -16,13 +16,15 @@ import { Component, HostBinding } from '@angular/core';
 import {animate, transition, trigger} from '@angular/animations';
 import { AnimationdemoComponent } from './animationdemo/animationdemo.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { ShowLogMessagesComponent } from './show-log-messages/show-log-messages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewMessageComponent,
     AnimationdemoComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ShowLogMessagesComponent
   ],
   imports: [
     BrowserModule,

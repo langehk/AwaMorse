@@ -4,11 +4,13 @@ import {Router, RouterModule, Routes} from '@angular/router';
 
 import {NewMessageComponent} from './new-message/new-message.component';
 import {WelcomeComponent} from './welcome/welcome.component';
+import {ShowLogMessagesComponent} from './show-log-messages/show-log-messages.component';
 
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
-  { path: 'new-message', component: NewMessageComponent}
+  { path: 'new-message', component: NewMessageComponent},
+  {path: 'show-log-message', component: ShowLogMessagesComponent}
 
 ];
 
