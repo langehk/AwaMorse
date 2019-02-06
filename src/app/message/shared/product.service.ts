@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs/internal/Observable';
 import {Product} from './product.model';
+import {map, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +11,38 @@ export class ProductService {
 
   constructor(private db: AngularFirestore) { }
 
-  getProducts(): Observable<any> {
+  getProducts(): Observable<{ id: string; name: string; brand: string; }[]> {
+    return this.db
+      .collection<Product>('products')
+      // This will return an Observable
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          // actions is an array of DocumentChangeAction
+          /*
+          const prods: Product[] = [];
+          actions.forEach(action => {
+            const data = action.payload.doc.data() as Product;
+            prods.push({
+              id: action.payload.doc.id,
+              name: data.name
+            });
+          });
+          return prods;
+          */
 
-    return this.db.collection('products').valueChanges();
-    /**
-     * return this.db.collection('products', ref => ref.orderBy('messages')).valueChanges();
-      */
+          return actions.map(action => {
+            const data = action.payload.doc.data() as Product;
+            return {
+              id: action.payload.doc.id,
+              name: data.name
+            };
+          });
+        })
+      );
   }
 
-  deleteProducts(): Observable<any> {
-    return this.db.collection('products').valueChanges();
-  }
-
-  getProductById(id: string) {
+  getProduct(id: string) {
     this.db.doc<Product>('products/' + id).get()
       .subscribe(productFound => {
 
@@ -54,10 +74,5 @@ export class ProductService {
       });
   }
 }
-
-
-
-
-
 
 

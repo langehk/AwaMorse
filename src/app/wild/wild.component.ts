@@ -16,26 +16,25 @@ export class WildComponent implements OnInit {
     this.getProducts();
   }
 
-
-  getProducts() {
-    this.products = this.ps.getProducts();
-  }
-
-  deleteProducts(product: Product) {
-    this.ps.delete(product);
-  }
-
-  updateProduct(product: Product)
-  {
+  updateProduct(product: Product) {
     product.name = product.name + '1';
     this.ps.update(product);
   }
 
-  addProduct(){
-    this.ps.add({name: 'New Product'});
+  deleteProduct(product: Product) {
+    this.ps.delete(product);
   }
 
+  addProduct() {
+    this.ps.add({name: 'SM7 wedge 60degree', brand: 'Titleist'});
+  }
 
+  getDetails(product: Product) {
+    this.ps.getProduct(product.id);
+  }
 
+  getProducts() {
+    this.products = this.ps.getProducts();
+  }
 
 }
