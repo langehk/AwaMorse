@@ -17,6 +17,7 @@ import {animate, transition, trigger} from '@angular/animations';
 import { AnimationdemoComponent } from './animationdemo/animationdemo.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ShowLogMessagesComponent } from './show-log-messages/show-log-messages.component';
+import { WildComponent } from './wild/wild.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ShowLogMessagesComponent } from './show-log-messages/show-log-messages.
     NewMessageComponent,
     AnimationdemoComponent,
     WelcomeComponent,
-    ShowLogMessagesComponent
+    ShowLogMessagesComponent,
+    WildComponent
   ],
   imports: [
     BrowserModule,
