@@ -5,7 +5,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MomentModule } from 'angular2-moment';
 import {MessageService} from './message/shared/message.service';
 import {AngularFireModule} from '@angular/fire';
@@ -18,6 +18,7 @@ import { AnimationdemoComponent } from './animationdemo/animationdemo.component'
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ShowLogMessagesComponent } from './show-log-messages/show-log-messages.component';
 import { WildComponent } from './wild/wild.component';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { WildComponent } from './wild/wild.component';
     MomentModule, AppRoutingModule, TooltipModule.forRoot(), ButtonsModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [
     MessageService,

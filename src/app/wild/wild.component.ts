@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ProductService} from '../message/shared/product.service';
 import {ObservableInput} from 'rxjs/internal/types';
 import {Product} from '../message/shared/product.model';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-wild',
@@ -10,7 +11,14 @@ import {Product} from '../message/shared/product.model';
 })
 export class WildComponent implements OnInit {
   products: ObservableInput<any[]>;
-  constructor(private ps: ProductService) { }
+  productFormGroup: FormGroup;
+  constructor(private ps: ProductService) {
+    this.productFormGroup = new FormGroup({
+  name: new FormControl(''),
+  brand: new FormControl('')
+});
+
+  }
 
   ngOnInit() {
     this.getProducts();
@@ -21,12 +29,21 @@ export class WildComponent implements OnInit {
     this.ps.update(product);
   }
 
+
   deleteProduct(product: Product) {
-    this.ps.delete(product);
+    this.ps.deleteProduct(product)
+    .then(() => {
+      window.alert('product deleted');
+    });
   }
 
   addProduct() {
-    this.ps.add({name: 'SM7 wedge 60degree', brand: 'Titleist'});
+    const productData = this.productFormGroup.value;
+    this.ps.addProduct(productData)
+      .subscribe(product => {
+        window.alert('product with id: ' + product.id + ' and name: ' + product.name + ' is added');
+      });
+
   }
 
   getDetails(product: Product) {
@@ -35,6 +52,11 @@ export class WildComponent implements OnInit {
 
   getProducts() {
     this.products = this.ps.getProducts();
+  }
+
+  uploadFile(event) {
+    const file = event.target.files[0];
+    debugger;
   }
 
 }

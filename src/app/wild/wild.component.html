@@ -25,9 +25,28 @@
 
       <button class="button1" (click)="getProducts();"><h2>Not working</h2></button>
 
-<ul>
-  <button (click)="addProduct()">Add</button>
-</ul>
+
+
+
+      <form [formGroup]="productFormGroup" (NgSubmit)="addProduct()">
+<label>
+  Name
+  <input type="text" formControlName="name">
+</label>
+
+        <label>
+          Brand
+          <input type="text" formControlName="brand">
+        </label>
+
+        <ul>
+        <input type="file" (change)="uploadFile($event)">
+        </ul>
+
+        <ul>
+          <button (click)="addProduct()">Add</button>
+        </ul>
+      </form>
 
     </div>
 
