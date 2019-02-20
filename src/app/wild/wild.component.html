@@ -8,7 +8,7 @@
   <li class="body" *ngFor="let product of products | async">
     {{product.name}} -- {{product.brand}} -- {{product.id}} --
 
-    <button class="button3" (click)="updateProduct(product)">Update</button>
+  
     <button class="button3" (click)="deleteProduct(product)">Delete</button>
     <button class="button3" (click)="getDetails(product)">Details</button>
   </li>

@@ -40,6 +40,7 @@ export class ProductService {
       });
   }
 
+  /*
   update(product: Product) {
     this.db.doc<Product>('products/' + product.id)
       .update(product)
@@ -48,6 +49,7 @@ export class ProductService {
         window.alert('Product updated');
       });
   }
+  */
 
   /**
   deleteProduct(id: String): Observable<void> {
