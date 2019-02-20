@@ -31,10 +31,7 @@ export class WildComponent implements OnInit {
 
 
   deleteProduct(product: Product) {
-    this.ps.deleteProduct(product)
-    .then(() => {
-      window.alert('product deleted');
-    });
+    this.ps.deleteProduct(product);
   }
 
   addProduct() {

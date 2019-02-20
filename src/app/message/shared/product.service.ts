@@ -76,13 +76,9 @@ this.db.doc<Product>('products/' + id)
   }
 */
 
-  deleteProduct(product: Product): Promise<any> {
+  deleteProduct(product: Product) {
     this.db.doc<Product>('products/' + product.id)
-      .delete()
-      .then(prod => {
-        debugger;
-        window.alert('product deleted');
-      });
+      .delete();
   }
 
 
@@ -91,8 +87,7 @@ this.db.doc<Product>('products/' + id)
       this.db.collection<Product>('products').add(
         {
           name: product.name,
-          brand: product.brand,
-          putter: product.putter
+          brand: product.brand
         }
       )
     ).pipe(

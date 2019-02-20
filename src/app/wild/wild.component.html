@@ -6,7 +6,7 @@
 <ul>
   <div *ngIf="!products">Loading...</div>
   <li class="body" *ngFor="let product of products | async">
-    {{product.name}} -- {{product.id}} -- {{product.brand}}
+    {{product.name}} -- {{product.name}} -- {{product.brand}} -- {{product.id}} --
 
     <button class="button3" (click)="updateProduct(product)">Update</button>
     <button class="button3" (click)="deleteProduct(product)">Delete</button>
@@ -21,18 +21,14 @@
     <div>
       <button class="button1" (click)="getProducts(product);"><h2>Refresh list</h2></button>
 
-      <button class="button1" (click)="getProducts();"><h2>Not working</h2></button>
-
-      <button class="button1" (click)="getProducts();"><h2>Not working</h2></button>
-
 
 
 
       <form [formGroup]="productFormGroup" (NgSubmit)="addProduct()">
-<label>
-  Name
-  <input type="text" formControlName="name">
-</label>
+        <label>
+          Name
+          <input type="text" formControlName="name">
+        </label>
 
         <label>
           Brand
