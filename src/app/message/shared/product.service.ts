@@ -91,7 +91,8 @@ this.db.doc<Product>('products/' + id)
       this.db.collection<Product>('products').add(
         {
           name: product.name,
-          brand: product.brand
+          brand: product.brand,
+          putter: product.putter
         }
       )
     ).pipe(
