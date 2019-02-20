@@ -25,7 +25,8 @@ export class WildComponent implements OnInit {
   }
 
   updateProduct(product: Product) {
-    product.name = product.name + '1';
+    product.name = product.name + '1',
+      product.brand = product.brand + '1';
     this.ps.update(product);
   }
 

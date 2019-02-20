@@ -24,7 +24,8 @@ export class ProductService {
             const data = product.payload.doc.data() as Product;
             return {
               id: product.payload.doc.id,
-              name: data.name
+              name: data.name,
+              brand: data.brand
             };
           });
         })
