@@ -25,8 +25,7 @@ export class ProductService {
             return {
               id: action.payload.doc.id,
               name: data.name,
-              brand: data.brand,
-              pictureId: data.pictureId
+              brand: data.brand
             };
           });
         })
@@ -91,8 +90,7 @@ this.db.doc<Product>('products/' + id)
       this.db.collection<Product>('products').add(
         {
           name: product.name,
-          brand: product.brand,
-          pictureId: product.pictureId
+          brand: product.brand
         }
       )
     ).pipe(

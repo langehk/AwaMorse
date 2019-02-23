@@ -30,7 +30,7 @@ export class WildComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.products = this.ps.getProducts()
+    this.products = this.ps.getProducts();
   }
 
   deleteProduct(product: Product) {
