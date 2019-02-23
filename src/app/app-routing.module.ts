@@ -1,28 +1,28 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {Router, RouterModule, Routes} from '@angular/router';
-
-import {NewMessageComponent} from './new-message/new-message.component';
-import {WelcomeComponent} from './welcome/welcome.component';
-import {ShowLogMessagesComponent} from './show-log-messages/show-log-messages.component';
-import {WildComponent} from './wild/wild.component';
-
+import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  {path: '', component: WelcomeComponent},
-  { path: 'new-message', component: NewMessageComponent},
-  {path: 'show-log-message', component: ShowLogMessagesComponent},
-  {path: 'wild', component: WildComponent}
-
+  {
+    path: 'customers',
+    loadChildren: './customers/customers.module#CustomersModule'
+  },
+  {
+    path: 'products',
+    loadChildren: './products/products.module#ProductsModule'
+  },
+  {
+    path: 'orders',
+    loadChildren: './orders/orders.module#OrdersModule'
+  },
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
-
 @NgModule({
-  exports: [RouterModule],
-  declarations: [],
-  imports: [
-    RouterModule.forRoot(routes),
-    CommonModule
-  ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
