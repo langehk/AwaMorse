@@ -2,33 +2,30 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs/internal/Observable';
 import {Product} from './product.model';
-import {first, map, switchMap, tap} from 'rxjs/operators';
+import {map, switchMap, tap} from 'rxjs/operators';
 import {storeCleanupWithContext} from '@angular/core/src/render3/instructions';
 import {from} from 'rxjs/internal/observable/from';
-
-
-const collection_path = 'products';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore) { }
 
-  getProducts(): Observable<Product[]> {
+  getProducts(): Observable<{ }[]> {
     return this.db
-      .collection<Product>(collection_path)
+      .collection<Product>('products')
       // This will return an Observable
       .snapshotChanges()
       .pipe(
-        map(actions => {
-          // actions is an array of DocumentChangeAction
-          return actions.map(action => {
+        map(products => {
+          return products.map(action => {
             const data = action.payload.doc.data() as Product;
             return {
               id: action.payload.doc.id,
               name: data.name,
+              brand: data.brand,
               pictureId: data.pictureId
             };
           });
@@ -36,57 +33,77 @@ export class ProductService {
       );
   }
 
-  deleteProduct(id: string): Observable<Product> {
-    return this.db.doc<Product>(collection_path + '/' + id)
-      .get()
-      .pipe(
-        first(),
-        tap(productDocument => {
-          debugger;
-        }),
-        switchMap(productDocument => {
-          if (!productDocument || !productDocument.data()) {
-            throw new Error('Product not found');
-            debugger;
-          } else {
-            return from(
-              this.db.doc<Product>(collection_path + '/' + id)
-                .delete()
-            ).pipe(
-              map(() => {
-                const data = productDocument.data() as Product;
-                data.id = productDocument.id;
-                return data;
-              })
-            );
-          }
-        })
-      );
-    /*return Observable.create(obs => {
-      this.db.doc<Product>('products/' + id)
-        .delete()
-        .then(() => obs.next())
-        .catch(err => obs.error(err))
-        .finally(() => obs.complete());
-    });*/
-    /*return this.db.doc<Product>('products/' + id)
-      .delete();*/
+  getProduct(id: string) {
+    this.db.doc<Product>('products/' + id).get()
+      .subscribe(productFound => {
+
+        const protData = productFound.data() as Product;
+      });
   }
 
+  /*
+  update(product: Product) {
+    this.db.doc<Product>('products/' + product.id)
+      .update(product)
+      .then(prod => {
+        debugger;
+        window.alert('Product updated');
+      });
+  }
+  */
+
+  /**
+  deleteProduct(id: String): Observable<void> {
+this.db.doc<Product>('products/' + id)
+  .get()
+  .pipe(
+  switchMap(productDocument => {
+  if (!productDocument || !productDocument.data()){
+    throw new Error('document not found');
+  }
+  else {
+  return from(
+    this.db.doc<Product>('products/' + id)
+      .delete()
+  );
+  }
+  })
+  );
+/*
+    /**
+    return Observable.create(obs => {
+      return this.db.doc<Product>('products/' + id)
+        .delete()
+        .then( () => obs.next())
+        .catch( err => obs.error(err));
+    });
+  }
+*/
+
+  deleteProduct(product: Product) {
+    this.db.doc<Product>('products/' + product.id)
+      .delete();
+  }
+
+
   addProduct(product: Product): Observable<Product> {
-    return from(
-      this.db.collection('products').add(
+    return from (
+      this.db.collection<Product>('products').add(
         {
           name: product.name,
+          brand: product.brand,
           pictureId: product.pictureId
         }
       )
     ).pipe(
-      map(productRef => {
-        product.id = productRef.id;
-        return product;
-      })
+        map( productRef => {
+          product.id = productRef.id;
+          return product;
+        })
     );
   }
+
+
 }
+
 
