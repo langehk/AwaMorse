@@ -3,6 +3,9 @@ import {ProductService} from '../message/shared/product.service';
 import {ObservableInput} from 'rxjs/internal/types';
 import {Product} from '../message/shared/product.model';
 import {FormControl, FormGroup} from '@angular/forms';
+import {FileService} from '../files/shared/file.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-wild',
@@ -10,9 +13,15 @@ import {FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./wild.component.scss']
 })
 export class WildComponent implements OnInit {
+
+  fileToUpload: File;
+  imageChangedEvent: any = '';
   products: ObservableInput<any[]>;
   productFormGroup: FormGroup;
-  constructor(private ps: ProductService) {
+  constructor(private ps: ProductService,
+              private fs: FileService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
     this.productFormGroup = new FormGroup({
   name: new FormControl(''),
   brand: new FormControl('')
@@ -21,17 +30,20 @@ export class WildComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getProducts();
+    this.products = this.ps.getProducts()
+      .pipe(
+        tap(products => {
+          products.forEach(product => {
+            if (product.pictureId) {
+              this.fs.getFileUrl(product.pictureId)
+                .subscribe(url => {
+                  product.url = url;
+                });
+            }
+          });
+        })
+      );
   }
-
-  /*
-  updateProduct(product: Product) {
-    product.name = product.name + '1',
-      product.brand = product.brand + '1';
-    this.ps.update(product);
-  }
-  */
-
 
   deleteProduct(product: Product) {
     this.ps.deleteProduct(product);
@@ -56,6 +68,7 @@ export class WildComponent implements OnInit {
 
   uploadFile(event) {
     const file = event.target.files[0];
+    this.fs.upload(file);
     debugger;
   }
 

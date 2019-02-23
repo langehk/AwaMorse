@@ -20,12 +20,13 @@ export class ProductService {
       .snapshotChanges()
       .pipe(
         map(products => {
-          return products.map(product => {
-            const data = product.payload.doc.data() as Product;
+          return products.map(action => {
+            const data = action.payload.doc.data() as Product;
             return {
-              id: product.payload.doc.id,
+              id: action.payload.doc.id,
               name: data.name,
-              brand: data.brand
+              brand: data.brand,
+              pictureId: data.pictureId
             };
           });
         })
@@ -90,7 +91,8 @@ this.db.doc<Product>('products/' + id)
       this.db.collection<Product>('products').add(
         {
           name: product.name,
-          brand: product.brand
+          brand: product.brand,
+          pictureId: product.pictureId
         }
       )
     ).pipe(

@@ -18,6 +18,8 @@ import { AnimationdemoComponent } from './animationdemo/animationdemo.component'
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ShowLogMessagesComponent } from './show-log-messages/show-log-messages.component';
 import { WildComponent } from './wild/wild.component';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import { ProductAddComponent } from './product-add/product-add.component';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { WildComponent } from './wild/wild.component';
     AnimationdemoComponent,
     WelcomeComponent,
     ShowLogMessagesComponent,
-    WildComponent
+    WildComponent,
+    ProductAddComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import { WildComponent } from './wild/wild.component';
     MomentModule, AppRoutingModule, TooltipModule.forRoot(), ButtonsModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireStorageModule
   ],
   providers: [
     MessageService,
