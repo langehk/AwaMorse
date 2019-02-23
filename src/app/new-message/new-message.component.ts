@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import {MessageService} from './message/shared/message.service';
+import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
+import {MessageService} from '../message/shared/message.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-new-message',
+  templateUrl: './new-message.component.html',
+  styleUrls: ['./new-message.component.scss']
 })
-export class AppComponent {
+export class NewMessageComponent {
   title = 'Morse App';
   messages: any[];
   messagesPaged: Observable<any[]>;
@@ -16,11 +16,12 @@ export class AppComponent {
   humanReadableMessage = '';
   time: number;
   constructor(private messageService: MessageService) {
-    this.messageService.getMessagesLastByLimit(5).subscribe(messages => {
+    this.messageService.getMessagesLastByLimit(2).subscribe(messages => {
       this.messages = messages;
       this.latest = messages[0];
     });
   }
+
 
   convertMessage(message: string): string {
     return this.messageService.convertToText(message);

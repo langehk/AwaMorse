@@ -1,0 +1,51 @@
+<div>
+  <li><a routerLink="" >Home</a></li>
+  <li><a routerLink="/show-log-message">Logs</a></li>
+
+  <h1>List of products:</h1>
+<ul>
+  <div *ngIf="!products">Loading...</div>
+  <li class="body" *ngFor="let product of products | async">
+    {{product.name}} -- {{product.brand}} -- {{product.id}} --
+
+  
+    <button class="button3" (click)="deleteProduct(product)">Delete</button>
+    <button class="button3" (click)="getDetails(product)">Details</button>
+  </li>
+</ul>
+
+  <div>
+    <h2>Add product:</h2>
+
+
+    <div>
+      <button class="button1" (click)="getProducts(product);"><h2>Refresh list</h2></button>
+
+
+
+
+      <form [formGroup]="productFormGroup" (NgSubmit)="addProduct()">
+        <label>
+          Name
+          <input type="text" formControlName="name">
+        </label>
+
+        <label>
+          Brand
+          <input type="text" formControlName="brand">
+        </label>
+
+        <ul>
+        <input type="file" (change)="uploadFile($event)" accept="image/*">
+        </ul>
+
+        <ul>
+          <button (click)="addProduct()">Add</button>
+        </ul>
+      </form>
+
+
+    </div>
+
+  </div>
+</div>
