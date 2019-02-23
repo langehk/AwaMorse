@@ -5,14 +5,14 @@ import {Router, RouterModule, Routes} from '@angular/router';
 import {NewMessageComponent} from './new-message/new-message.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 import {ShowLogMessagesComponent} from './show-log-messages/show-log-messages.component';
-import {WildComponent} from './wild/wild.component';
+import {WildComponent} from './products-list/products-list.component';
 
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
   { path: 'new-message', component: NewMessageComponent},
   {path: 'show-log-message', component: ShowLogMessagesComponent},
-  {path: 'wild', component: WildComponent}
+  {path: 'products-list', component: WildComponent}
 
 ];
 

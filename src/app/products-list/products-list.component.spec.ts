@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WildComponent } from './wild.component';
+import { WildComponent } from './products-list.component';
 
 describe('WildComponent', () => {
   let component: WildComponent;
