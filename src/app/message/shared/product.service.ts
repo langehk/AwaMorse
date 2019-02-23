@@ -91,6 +91,7 @@ this.db.doc<Product>('products/' + id)
         {
           name: product.name,
           brand: product.brand
+          //,pictureId
         }
       )
     ).pipe(
