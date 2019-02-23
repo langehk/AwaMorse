@@ -31,18 +31,6 @@ export class WildComponent implements OnInit {
 
   ngOnInit() {
     this.products = this.ps.getProducts()
-      .pipe(
-        tap(products => {
-          products.forEach(product => {
-            if (product.pictureId) {
-              this.fs.getFileUrl(product.pictureId)
-                .subscribe(url => {
-                  product.url = url;
-                });
-            }
-          });
-        })
-      );
   }
 
   deleteProduct(product: Product) {
