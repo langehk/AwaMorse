@@ -5,7 +5,8 @@ import {Product} from '../message/shared/product.model';
 import {FormControl, FormGroup} from '@angular/forms';
 import {FileService} from '../files/shared/file.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {tap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-wild',
@@ -25,6 +26,7 @@ export class WildComponent implements OnInit {
     this.productFormGroup = new FormGroup({
   name: new FormControl(''),
   brand: new FormControl('')
+
 });
 
   }
@@ -39,11 +41,21 @@ export class WildComponent implements OnInit {
 
   addProduct() {
     const productData = this.productFormGroup.value;
-    this.ps.addProduct(productData)
-      .subscribe(product => {
-        window.alert('product with id: ' + product.id + ' and name: ' + product.name + ' is added');
-      });
+    if (this.fileToUpload) {
+      this.fs.upload(this.fileToUpload)
+        .pipe(
+          switchMap( metadata => {
+            debugger;
+            productData.pictureId = metadata.id;
+            return this.ps.addProduct(productData);
+          })
+        )
+        .subscribe( product => {
 
+          debugger;
+          window.alert('product with id: ' + product.id + ' and name: ' + product.name + ' is added' + product.brand + ' is added');
+        });
+    }
   }
 
   getDetails(product: Product) {
@@ -55,9 +67,7 @@ export class WildComponent implements OnInit {
   }
 
   uploadFile(event) {
-    const file = event.target.files[0];
-    this.fs.upload(file);
-    debugger;
+    this.fileToUpload = event.target.files[0];
   }
 
 }

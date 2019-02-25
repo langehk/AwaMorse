@@ -25,7 +25,8 @@ export class ProductService {
             return {
               id: action.payload.doc.id,
               name: data.name,
-              brand: data.brand
+              brand: data.brand,
+              pictureId: data.pictureId
             };
           });
         })
@@ -40,44 +41,7 @@ export class ProductService {
       });
   }
 
-  /*
-  update(product: Product) {
-    this.db.doc<Product>('products/' + product.id)
-      .update(product)
-      .then(prod => {
-        debugger;
-        window.alert('Product updated');
-      });
-  }
-  */
 
-  /**
-  deleteProduct(id: String): Observable<void> {
-this.db.doc<Product>('products/' + id)
-  .get()
-  .pipe(
-  switchMap(productDocument => {
-  if (!productDocument || !productDocument.data()){
-    throw new Error('document not found');
-  }
-  else {
-  return from(
-    this.db.doc<Product>('products/' + id)
-      .delete()
-  );
-  }
-  })
-  );
-/*
-    /**
-    return Observable.create(obs => {
-      return this.db.doc<Product>('products/' + id)
-        .delete()
-        .then( () => obs.next())
-        .catch( err => obs.error(err));
-    });
-  }
-*/
 
   deleteProduct(product: Product) {
     this.db.doc<Product>('products/' + product.id)
@@ -86,11 +50,13 @@ this.db.doc<Product>('products/' + id)
 
 
   addProduct(product: Product): Observable<Product> {
+    debugger;
     return from (
       this.db.collection<Product>('products').add(
         {
           name: product.name,
-          brand: product.brand
+          brand: product.brand,
+          pictureId: product.pictureId
           //,pictureId
         }
       )

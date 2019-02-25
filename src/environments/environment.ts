@@ -5,7 +5,7 @@ export const environment = {
     authDomain: 'awamorsecode.firebaseapp.com',
     databaseURL: 'https://awamorsecode.firebaseio.com',
     projectId: 'awamorsecode',
-    storageBucket: '',
+    storageBucket: 'awamorsecode.appspot.com',
     messagingSenderId: '1056158566367'
   }
 };
